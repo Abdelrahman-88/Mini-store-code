@@ -1,0 +1,59 @@
+@import "../../styles.scss";
+section {
+    min-height: 100vh;
+}
+
+h1 {
+    color: $green;
+}
+
+.btn {
+    color: white;
+    border: solid 1px $dark;
+    position: relative;
+    overflow: hidden;
+    background-color: $green;
+}
+
+.btn span {
+    z-index: 2;
+    position: relative;
+}
+
+.btn::after {
+    content: '';
+    width: 200%;
+    height: 200%;
+    top: 0;
+    left: 50%;
+    background-color: $dark;
+    z-index: 1;
+    position: absolute;
+    transform: skewX(-90deg);
+    transition: transform .5s, left .5s, top .5s;
+}
+
+.btn:hover:after {
+    left: -5%;
+    top: -5%;
+    transform: skewX(0deg);
+}
+
+input,
+.upload label {
+    border-color: $green;
+}
+
+.form-control:focus,
+.upload label:hover {
+    border-color: $green !important;
+    box-shadow: 0 0 0 0.25rem rgb(94 206 123 / 25%);
+}
+
+.upload label {
+    cursor: pointer;
+}
+
+.upload-bord {
+    border-color: #dc3545 !important;
+}

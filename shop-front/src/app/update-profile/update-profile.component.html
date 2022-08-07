@@ -1,0 +1,38 @@
+<ngx-spinner color="#5ECE7B" type="ball-scale-multiple"></ngx-spinner>
+<section ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="py-5 mt-5">
+    <div class="container">
+        <h1 class="my-4">Update profile</h1>
+
+        <form [formGroup]="updateForm" (ngSubmit)="setData(updateForm)">
+            <div class="form-floating mb-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[updateForm.get('name')?.errors != null && updateForm.get('name')?.touched ? 'is-invalid':'' , updateForm.get('name')?.errors == null && updateForm.get('name')?.touched ? 'is-valid':'']" formControlName="name"
+                    type="text" class="form-control bg-transparent" id="name" placeholder="Name">
+                <label for="name">Name <span class="text-danger">*</span></label>
+                <div *ngIf="updateForm.get('name')?.errors!=null && updateForm.get('name')?.touched" class="text-danger mt-2">
+                    <p *ngIf="updateForm.get('name')?.errors?.['required']">Name is required</p>
+                    <p *ngIf="updateForm.get('name')?.errors?.['pattern']">Letters only available</p>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[updateForm.get('email')?.errors != null && updateForm.get('email')?.touched ? 'is-invalid':'' , updateForm.get('email')?.errors == null && updateForm.get('email')?.touched ? 'is-valid':'']" formControlName="email"
+                    type="email" class="form-control bg-transparent" id="email" placeholder="name@example.com">
+                <label for="email">Email <span class="text-danger">*</span></label>
+                <div *ngIf="updateForm.get('email')?.errors!=null && updateForm.get('email')?.touched" class="text-danger mt-2">
+                    <p *ngIf="updateForm.get('email')?.errors?.['required']">Email is required</p>
+                    <p *ngIf="updateForm.get('email')?.errors?.['email']">Email should be such as example@domain.com
+                    </p>
+                </div>
+            </div>
+            <div class="mb-3 upload">
+                <input [class.dark-mode-color]="darkMode" (change)="onFileChange($event)" accept="image/png,image/jpg,image/jpeg" type="file" name="uploadfile" id="profile" class="d-none" />
+                <label [class.dark-mode-back]="darkMode" [class.dark-mode-color]="darkMode" class="d-block form-control py-3" [ngClass]="[show && touched ? 'is-invalid upload-bord':'' , !show && touched ? 'is-valid':'']" for="profile">{{image?.name ?image?.name:'Upload profile picture'}}</label>
+                <div class="text-danger mt-2" *ngIf="show ">
+                    <p> you must enter only one imge and type must be png or jpg or jpeg and size of file must be less than 1m</p>
+                </div>
+            </div>
+            <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" type="submit" class="btn border-0"><span>Update</span></button>
+            <a routerLink="/profile" class="btn border-0 ms-2 cancel"><span>Cancel</span></a>
+
+        </form>
+    </div>
+</section>

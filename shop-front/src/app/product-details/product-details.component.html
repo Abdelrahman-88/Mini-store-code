@@ -1,0 +1,36 @@
+<ngx-spinner color="#5ECE7B" type="ball-scale-multiple"></ngx-spinner>
+<section ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-7 text-center">
+                <div *ngIf="!owl" class="row basic">
+                    <div class="col-2">
+                        <img *ngFor="let item of product?.gallery; let i = index;" [ngClass]="{'active': active === i}" (click)="changeImg($event,i)" class="w-100 p-3 gallery mb-2 border" src="{{item}}" alt="{{product.name}}">
+                    </div>
+                    <div class="col-10">
+                        <div class="p-3 bg-white" *ngIf="product?.gallery?.length">
+                            <img class="w-100 gallery-main" src="{{src ? src:product?.gallery[0]}}" alt="gallery">
+                        </div>
+                        <div class="p-3" *ngIf="!product?.gallery?.length">
+                            <img class="w-100" src="assets/imgs/no-image.png" alt="no-image">
+                        </div>
+                    </div>
+                </div>
+                <owl-carousel-o *ngIf="owl" [options]="customOptions" class="text-center option">
+                    <ng-template *ngFor="let item of product?.gallery;" carouselSlide>
+                        <img class="img-fluid owl-gallery" src="{{item}}" alt="gallery">
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div class="col-lg-5 ">
+                <div class="p-3 ">
+                    <h2>{{product?.name}}</h2>
+                    <h1 class="text-uppercase ">{{product?.category}}</h1>
+                    <h3 class="my-3 ">Price: {{rate?.sign}} {{rate.code == 'jpy' ? (product.price*rate.rate| number : '1.0-2'):(product.price*rate.rate| number : '1.2-2')}}</h3>
+                    <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" (click)="addToCart(product)" class="btn border-0 my-3 "><span>ADD TO CART</span></button>
+                    <p class="mt-3 ">{{product?.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

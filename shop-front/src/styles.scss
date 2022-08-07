@@ -1,0 +1,35 @@
+    $dark:#212529;
+    $green:#5ECE7B;
+    $lightdark :#182327cd;
+    $light:white;
+    $red:#dc3545;
+    $dark-mode:#202124;
+    .dark-mode-back {
+        background-color: $dark-mode !important;
+    }
+    
+    .dark-mode-color {
+        color: $light !important;
+    }
+    
+    .btn-dark::after {
+        background-color: $light !important;
+    }
+    
+    .dark-mode-color-dark {
+        color: $dark-mode !important;
+    }
+    
+    .back-dark-mode:hover {
+        background-color: rgba(110, 110, 110, 0.1) !important;
+    }
+    
+    .dark-active {
+        background-color: $green !important;
+        color: $dark-mode !important;
+        border-color: $light !important;
+    }
+    
+    .dark-hover.page-link:hover {
+        color: $dark-mode !important;
+    }

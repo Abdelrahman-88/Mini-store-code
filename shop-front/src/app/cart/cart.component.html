@@ -1,0 +1,78 @@
+<ngx-spinner color="#5ECE7B" type="ball-scale-multiple"></ngx-spinner>
+<section ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="py-5 mt-5">
+    <div class="container">
+        <h1 class="my-4">My Shopping Cart</h1>
+        <div *ngIf="!services?.length" class="text-center fw-bolder my-5">
+            <i class="fa-solid fa-cart-shopping empty-cart fs-1 my-3"></i>
+            <h4 class="text-danger">Your cart is empty!</h4>
+            <p>Browse our categories and discover our best deals!</p>
+            <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" routerLink="/home" class="btn border-0 my-3"><span>START SHOPPING</span></button>
+        </div>
+        <div class="table-responsive">
+            <table ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" *ngIf="services?.length" class="table text-center text-dark">
+                <tbody>
+                    <tr *ngFor="let service of services">
+                        <td class="name">{{service.name}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.price*rate.rate| number : '1.0-2'):(service.price*rate.rate| number : '1.2-2')}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.total*rate.rate| number : '1.0-2'):(service.total*rate.rate|
+                            number : '1.2-2')}}</td>
+                        <td>
+                            <i (click)="counter(service.serviceId,1)" class="fa-solid fa-square-plus cart-icon"></i><br>
+                            <p class="my-0">{{service.quantity}}</p>
+                            <i [ngClass]="(service.quantity <=1 ? 'disable': '')" (click)="counter(service.serviceId,-1)" class="fa-solid fa-square-minus cart-icon"></i>
+                        </td>
+
+                        <td><img [routerLink]="['/productDetails',service.serviceId]" class="gallery" src="{{service?.poster ? service?.poster:'assets/imgs/no-image.png' }}" alt=""></td>
+                        <td><br><i (click)="removeFromCart(service.serviceId)" class="fa-solid fa-rectangle-xmark cart-icon"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td></td>
+                        <td></td>
+                        <td>{{rate.sign}} {{rate.code == 'jpy' ? (total*rate.rate| number : '1.0-2'):(total*rate.rate| number : '1.2-2')}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form *ngIf="services?.length" [formGroup]="cartForm" class="form-floating my-3" (ngSubmit)="setData(cartForm)">
+            <div class="form-floating my-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[cartForm.get('contactNumber')?.errors != null && cartForm.get('contactNumber')?.touched ? 'is-invalid':'' , cartForm.get('contactNumber')?.errors == null && cartForm.get('contactNumber')?.touched ? 'is-valid':'']"
+                    formControlName="shippingAddress" formControlName="contactNumber" type="text" class="form-control bg-transparent" id="floatingInput" placeholder="Contact number">
+                <label for="floatingInput">Contact number <span class="text-danger">*</span></label>
+            </div>
+            <div *ngIf="cartForm.get('contactNumber')?.errors != null && cartForm.get('contactNumber')?.touched" class="text-danger">
+
+                <p *ngIf="cartForm.get('contactNumber')?.errors?.['required']">
+                    Contact number is required</p>
+
+                <p *ngIf="cartForm.get('contactNumber')?.errors?.['pattern']">Contact number should be such as 010********</p>
+
+            </div>
+
+            <div class="form-floating my-3">
+
+                <textarea [class.dark-mode-color]="darkMode" [ngClass]="[cartForm.get('shippingAddress')?.errors != null && cartForm.get('shippingAddress')?.touched ? 'is-invalid':'' , cartForm.get('shippingAddress')?.errors == null && cartForm.get('shippingAddress')?.touched ? 'is-valid':'']"
+                    formControlName="shippingAddress" class="form-control bg-transparent" placeholder="Shipping address" id="floatingTextarea2"></textarea>
+                <label for="floatingTextarea2">Shipping address <span class="text-danger">*</span></label>
+
+            </div>
+            <div *ngIf="cartForm.get('shippingAddress')?.errors != null && cartForm.get('shippingAddress')?.touched" class="text-danger">
+
+                <p *ngIf="cartForm.get('shippingAddress')?.errors?.['required']">
+                    Shipping address is required</p>
+
+                <p *ngIf="cartForm.get('shippingAddress')?.errors?.['pattern']">Only letters and numbers available</p>
+
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input formControlName="payment" class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="card">
+                <label class="form-check-label" for="inlineRadio1">Visa/Mastercard <i class="fa-solid fa-credit-card me-1"></i><span class="text-danger">*</span></label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input formControlName="payment" class="form-check-input" type="radio" name="payment" id="inlineRadio2" value="cash">
+                <label class="form-check-label" for="inlineRadio2">Cash on delivery <i class="fa-solid fa-money-bill me-1"></i><span class="text-danger">*</span></label>
+            </div>
+
+            <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" class="btn border-0 my-3 d-block"><span>CHECK OUT</span></button>
+        </form>
+    </div>
+</section>

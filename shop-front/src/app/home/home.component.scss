@@ -1,0 +1,146 @@
+        @import "../../styles.scss";
+        section {
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: $green;
+        }
+        
+        a {
+            color: $dark;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        a:focus {
+            color: unset !important;
+        }
+        
+        a:hover {
+            color: $green !important;
+        }
+        
+        .active-cat {
+            color: $green !important;
+            border-bottom: solid 2px $green;
+        }
+        
+        .page-link {
+            cursor: pointer;
+            transition: background-color .5s, color .5s;
+        }
+        
+        .page-link:hover {
+            background-color: $green !important;
+            color: white !important;
+        }
+        
+        .active {
+            background-color: $green !important;
+            color: white !important;
+        }
+        
+        .fa-spinner {
+            color: $green !important;
+        }
+        
+        input,
+        .btn {
+            border-color: $green;
+        }
+        
+        .btn {
+            background-color: $green;
+            color: white !important;
+        }
+        
+        .form-control:focus,
+        .btn:focus {
+            border-color: $green !important;
+            box-shadow: 0 0 0 0.25rem rgb(94 206 123 / 25%);
+        }
+        
+        .content img {
+            height: 300px;
+            object-fit: contain;
+            cursor: pointer;
+            background-color: $light;
+        }
+        
+        .name {
+            text-overflow: ellipsis !important;
+            white-space: noWrap;
+            overflow: hidden;
+        }
+        
+        .cart {
+            width: 35px;
+            height: 35px;
+            color: white;
+            background-color: $green;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0);
+            transition: transform .5s;
+            cursor: pointer;
+        }
+        
+        .product:hover .cart {
+            transform: scale(1);
+        }
+        
+        .product {
+            transition: box-shadow .5s, transform .5s;
+        }
+        
+        .product:hover {
+            box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .15)!important;
+            transform: scale(.9);
+        }
+        
+        .layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.108);
+            z-index: 2;
+        }
+        
+        .dropdown-menu {
+            min-width: inherit;
+        }
+        
+        @media screen and (max-width:767.99px) {
+            .content img {
+                height: auto;
+            }
+        }
+        
+        @media screen and(max-width: 600px) {
+            a,
+            select {
+                font-size: 13px;
+            }
+        }
+        
+        @media screen and(max-width: 460px) {
+            a,
+            select {
+                font-size: 9px;
+            }
+            li {
+                margin-left: 3px !important;
+                margin-right: 3px !important;
+            }
+            .btn {
+                padding: 2px;
+            }
+        }

@@ -1,0 +1,19 @@
+<section ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="py-5 mt-5">
+    <div class="container">
+        <h1 class="my-4">Profile details</h1>
+        <div class="row align-items-start">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li class="my-4"><i class="icon fas fa-id-badge me-2 fa-fw"></i><span class="fw-bolder">Name :</span> {{user?.name}} <i routerLink="/updateProfile" type="button" class="fas fa-edit ms-2 fa-fw"></i></li>
+                    <li class="my-4"><i class="icon fas fa-envelope me-2 fa-fw"></i><span class="fw-bolder">Email :</span> {{user?.email}} <i routerLink="/updateProfile" type="button" class="fas fa-edit ms-2 fa-fw"></i></li>
+                    <li class="my-4"><i class="icon fas fa-key me-2 fa-fw"></i><span class="fw-bolder">Password :</span> **************** <i routerLink="{{user?.socialLogin ? '/changeSocialPassword':'/updatePassword'}}" type="button" class="fas fa-edit ms-2 fa-fw"></i></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <img class="w-100 profile" src="{{user.profilePic ? user.profilePic:'assets/imgs/avatar.png'}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

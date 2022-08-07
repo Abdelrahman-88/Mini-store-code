@@ -1,0 +1,21 @@
+@import "../../styles.scss";
+section {
+    min-height: 100vh;
+}
+
+h1 {
+    color: $green;
+}
+
+.fa-edit {
+    transition: color .5s;
+}
+
+.fa-edit:hover {
+    color: $green;
+}
+
+.profile {
+    object-fit: contain;
+    max-height: 500px;
+}

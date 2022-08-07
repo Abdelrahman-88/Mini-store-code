@@ -1,0 +1,53 @@
+<ngx-spinner color="#5ECE7B" type="ball-scale-multiple"></ngx-spinner>
+<section ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="py-5 mt-5">
+    <div class="container">
+        <div *ngIf="!cart?.products?.length&&response" class="text-center fw-bolder my-5">
+            <i class="fa-solid fa-cart-shopping empty-cart fs-1 my-3"></i>
+            <h4 class="text-danger">No order details found!</h4>
+            <p>Browse our categories and discover our best deals!</p>
+            <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" routerLink="/home" class="btn border-0 my-3"><span>START SHOPPING</span></button>
+        </div>
+        <div *ngIf="cart?.products?.length" class="table-responsive mt-4">
+            <table ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="table text-center text-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let service of cart.products">
+                        <td class="name">{{service.product.name}}</td>
+                        <td>
+                            {{service.quantity}}
+                        </td>
+                        <td>
+                            {{cart.currency == 'jpy' ? (service.product.price*currency?.rate| number : '1.0-2'):(service.product.price*currency?.rate| number : '1.2-2')}}
+                        </td>
+                        <td>
+                            {{cart.currency}}
+                        </td>
+
+                        <td><img [routerLink]="['/productDetails',service.product._id]" class="gallery" src="{{service?.product.poster ? service?.product.poster:'assets/imgs/no-image.png' }}" alt=""></td>
+                        <td>
+                            {{cart.currency == 'jpy' ? (service.total| number : '1.0-2'):(service.total| number : '1.2-2')}} {{currency?.sign}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="total" scope="row">Total</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{cart.currency == 'jpy' ? (cart.totalPrice| number : '1.0-2'):(cart.totalPrice| number : '1.2-2')}} {{currency?.sign}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>

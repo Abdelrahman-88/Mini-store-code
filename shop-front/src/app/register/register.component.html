@@ -1,0 +1,55 @@
+<ngx-spinner color="#5ECE7B" type="ball-scale-multiple"></ngx-spinner>
+<section ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="py-5 mt-5">
+    <div class="container">
+        <h1 class="my-4">Register</h1>
+
+        <form [formGroup]="registerForm" (ngSubmit)="setData(registerForm)">
+            <div class="form-floating mb-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[registerForm.get('name')?.errors != null && registerForm.get('name')?.touched ? 'is-invalid':'' , registerForm.get('name')?.errors == null && registerForm.get('name')?.touched ? 'is-valid':'']" formControlName="name"
+                    type="text" class="form-control bg-transparent" id="name" placeholder="Name">
+                <label for="name">Name <span class="text-danger">*</span></label>
+                <div *ngIf="registerForm.get('name')?.errors!=null && registerForm.get('name')?.touched" class="text-danger mt-2">
+                    <p *ngIf="registerForm.get('name')?.errors?.['required']">Name is required</p>
+                    <p *ngIf="registerForm.get('name')?.errors?.['pattern']">Letters only available</p>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[registerForm.get('email')?.errors != null && registerForm.get('email')?.touched ? 'is-invalid':'' , registerForm.get('email')?.errors == null && registerForm.get('email')?.touched ? 'is-valid':'']"
+                    formControlName="email" type="email" class="form-control bg-transparent" id="email" placeholder="name@example.com">
+                <label for="email">Email <span class="text-danger">*</span></label>
+                <div *ngIf="registerForm.get('email')?.errors!=null && registerForm.get('email')?.touched" class="text-danger mt-2">
+                    <p *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</p>
+                    <p *ngIf="registerForm.get('email')?.errors?.['email']">Email should be such as example@domain.com
+                    </p>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[registerForm.get('password')?.errors != null && registerForm.get('password')?.touched ? 'is-invalid':'' , registerForm.get('password')?.errors == null && registerForm.get('password')?.touched ? 'is-valid':'']"
+                    formControlName="password" type="password" class="form-control bg-transparent" id="password" placeholder="Password">
+                <label for="password">Password <span class="text-danger">*</span></label>
+                <div *ngIf="registerForm.get('password')?.errors!=null && registerForm.get('password')?.touched" class="text-danger mt-2">
+                    <p *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</p>
+                    <p *ngIf="registerForm.get('password')?.errors?.['pattern']">Password should contain at least 8 characters (1 number, 1 lowercase character, 1 uppercase character , 1 special character(@,$,&,_))</p>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input [class.dark-mode-color]="darkMode" [ngClass]="[(registerForm.get('cPassword')?.errors != null||registerForm.get('cPassword')?.value!==registerForm.get('password')?.value) && registerForm.get('cPassword')?.touched ? 'is-invalid':'' , registerForm.get('cPassword')?.errors == null && registerForm.get('cPassword')?.touched&&registerForm.get('cPassword')?.value===registerForm.get('password')?.value ? 'is-valid':'']"
+                    formControlName="cPassword" type="password" class="form-control bg-transparent" id="cPassword" placeholder="Confirm password">
+                <label for="cPassword">Confirm password <span class="text-danger">*</span></label>
+                <div *ngIf="registerForm.get('cPassword')?.errors!=null && registerForm.get('cPassword')?.touched" class="text-danger mt-2">
+                    <p *ngIf="registerForm.get('cPassword')?.errors?.['required']">Confirm password is required</p>
+                </div>
+                <p class="text-danger mt-2" *ngIf="registerForm.get('cPassword')?.value!=registerForm.get('password')?.value && registerForm.get('cPassword')?.touched">Confirm password must match password</p>
+            </div>
+
+            <div class="mb-3 upload">
+                <input [class.dark-mode-color]="darkMode" (change)="onFileChange($event)" accept="image/png,image/jpg,image/jpeg" type="file" name="uploadfile" id="profile" class="d-none" />
+                <label [class.dark-mode-back]="darkMode" [class.dark-mode-color]="darkMode" class="d-block form-control py-3" [ngClass]="[show && touched ? 'is-invalid upload-bord':'' , !show && touched ? 'is-valid':'']" for="profile">{{image?.name ?image?.name:'Upload profile picture'}}</label>
+                <div class="text-danger mt-2" *ngIf="show ">
+                    <p> you must enter only one imge and type must be png or jpg or jpeg and size of file must be less than 1m</p>
+                </div>
+            </div>
+            <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" type="submit" class="btn border-0"><span>Register</span></button>
+        </form>
+    </div>
+</section>

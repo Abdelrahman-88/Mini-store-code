@@ -1,0 +1,105 @@
+@import "../../styles.scss";
+section {
+    min-height: 100vh;
+}
+
+h1 {
+    color: $green;
+}
+
+.gallery {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    cursor: pointer;
+    background-color: $light;
+}
+
+table {
+    white-space: nowrap;
+}
+
+.name {
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    max-width: 100px;
+}
+
+.cart-icon {
+    cursor: pointer;
+    transition: color .5s;
+}
+
+.cart-icon:hover {
+    color: $green;
+}
+
+.fa-rectangle-xmark:hover {
+    color: red;
+}
+
+.disable {
+    opacity: .5;
+    pointer-events: none;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+.btn {
+    color: white;
+    border: solid 1px $dark;
+    position: relative;
+    overflow: hidden;
+    background-color: $green;
+}
+
+.btn span {
+    z-index: 2;
+    position: relative;
+}
+
+.btn::after {
+    content: '';
+    width: 200%;
+    height: 200%;
+    top: 0;
+    left: 50%;
+    background-color: $dark;
+    z-index: 1;
+    position: absolute;
+    transform: skewX(-90deg);
+    transition: transform .5s, left .5s, top .5s;
+}
+
+.btn:hover:after {
+    left: -5%;
+    top: -5%;
+    transform: skewX(0deg);
+}
+
+input,
+textarea {
+    border-color: $green;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.form-control:focus {
+    border-color: $green !important;
+    box-shadow: 0 0 0 0.25rem rgb(94 206 123 / 25%);
+}
+
+.form-check-input:checked {
+    background-color: $green;
+    border-color: $green;
+}
+
+.form-check-input:focus {
+    border-color: $green;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(94 206 123 / 25%);
+}

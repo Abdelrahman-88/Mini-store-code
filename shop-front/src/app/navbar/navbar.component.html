@@ -1,0 +1,101 @@
+<section>
+    <div (click)="slide()" *ngIf="show||cart" [@fadeInOut] class="layer"></div>
+
+    <div ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="header fixed-top shadow">
+        <nav ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <ul class="navbar-nav flex-row">
+                        <li class="nav-item mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link py-3" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link py-3" routerLink="/login" routerLinkActive="active">Login</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link py-3" routerLink="/register" routerLinkActive="active">Register</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <a class="navbar-brand" routerLink="/home"><img src="assets/imgs/Group.png" alt="logo"></a>
+                </div>
+                <div>
+                    <ul class="navbar-nav flex-row justify-content-between align-items-center">
+                        <li class="nav-item dropdown mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link dropdown-toggle text-end" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i *ngIf="!user?.profilePic" class="fa-solid fa-user"></i>
+                                <img class="profile" *ngIf="user?.profilePic" src="{{user?.profilePic}}" alt="profilePic">
+                            </a>
+                            <ul ngClass="{{darkMode ? 'dark-mode-color dark-mode-back border-white':''}}" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li routerLink="/profile"><a ngClass="{{darkMode ? 'dark-mode-color back-dark-mode':''}}" class="dropdown-item">Profile</a></li>
+                                <li routerLink="/orders"><a ngClass="{{darkMode ? 'dark-mode-color back-dark-mode':''}}" class="dropdown-item">Orders</a></li>
+                                <li (click)="logOut()"><a ngClass="{{darkMode ? 'dark-mode-color back-dark-mode':''}}" class="dropdown-item">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" (click)="getCartData();slide()" class="nav-link" routerLinkActive="active"><i class="fa-solid fa-cart-shopping position-relative">
+                                <span class="indicator" *ngIf="services?.length">{{services?.length}}</span>
+                            </i>
+                                </a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" (click)="activateDarkMode()" class="nav-link" routerLinkActive="active"><i ngClass="{{darkMode ? 'fa-toggle-on':'fa-toggle-off'}}" class="fa-solid"></i></a>
+                        </li>
+
+                        <li class="nav-item dropdown mx-2">
+                            <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link dropdown-toggle fw-bold" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{activeSign}}
+                            </a>
+                            <ul ngClass="{{darkMode ? 'dark-mode-color dark-mode-back border-white':''}}" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <li *ngFor=" let sign of signs "><a ngClass="{{darkMode ? 'dark-mode-color back-dark-mode':''}}" (click)="getSign(sign)" class="dropdown-item fw-bold">{{sign}}</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div ngClass="{{darkMode ? 'dark-mode-color dark-mode-back':''}}" *ngIf="cart " [@slideInOut] class="cart p-5 table-responsive shadow">
+            <div class="mt-5">
+                <i ngClass="{{darkMode ? 'dark-mode-color':''}}" (click)="slide()" class="fa-solid fa-xmark"></i>
+                <h3 class="text-center pb-2">My Shopping Cart</h3>
+                <div *ngIf="!services?.length" class="text-center fw-bolder my-5">
+                    <i class="fa-solid fa-cart-shopping empty-cart fs-1 my-3"></i>
+                    <h4 class="text-danger">Your cart is empty!</h4>
+                    <p ngClass="{{darkMode ? 'dark-mode-color':''}}">Browse our categories and discover our best deals!</p>
+                    <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" (click)="slide()" routerLink="/home" class="btn border-0 my-3"><span>START SHOPPING</span></button>
+                </div>
+                <div>
+                    <table ngClass="{{darkMode ? 'dark-mode-color dark-mode-back':''}}" *ngIf="services?.length" class="table text-center text-dark">
+                        <tbody>
+                            <tr *ngFor="let service of services ">
+                                <td class="name">{{service.name}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.price*rate.rate| number : '1.0-2'):(service.price*rate.rate| number : '1.2-2')}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.total*rate.rate| number
+                                    : '1.0-2'):(service.total*rate.rate| number : '1.2-2')}}</td>
+                                <td>
+                                    <i (click)="counter(service.serviceId,1)" class="fa-solid fa-square-plus cart-icon"></i><br>
+                                    <p class="my-0">{{service.quantity}}</p>
+                                    <i [ngClass]="(service.quantity <=1 ? 'disable': '')" (click)="counter(service.serviceId,-1)" class="fa-solid fa-square-minus cart-icon"></i>
+                                </td>
+
+                                <td><img class="gallery" src="{{service?.poster ? service?.poster: 'assets/imgs/no-image.png' }}" alt="gallery"></td>
+                                <td><br><i (click)="removeFromCart(service.serviceId) " class="fa-solid fa-rectangle-xmark cart-icon"></i></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total</th>
+                                <td></td>
+                                <td></td>
+                                <td>{{rate.sign}} {{rate.code == 'jpy' ? (total*rate.rate| number : '1.0-2'):(total*rate.rate| number : '1.2-2')}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="services?.length" class="text-center">
+                    <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" (click)="slide()" routerLink="/cart" class="btn border-0 my-3"><span>CHECK OUT</span></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
