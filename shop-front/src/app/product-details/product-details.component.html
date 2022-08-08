@@ -26,7 +26,7 @@
                 <div class="p-3 ">
                     <h2>{{product?.name}}</h2>
                     <h1 class="text-uppercase ">{{product?.category}}</h1>
-                    <h3 class="my-3 ">Price: {{rate?.sign}} {{rate.code == 'jpy' ? (product.price*rate.rate| number : '1.0-2'):(product.price*rate.rate| number : '1.2-2')}}</h3>
+                    <h3 class="my-3 ">Price: {{rate?.sign}} {{rate.code == 'jpy' ? (product.price*rate.rate| number : '1.0-0'):(product.price*rate.rate| number : '1.2-2')}}</h3>
                     <button ngClass="{{darkMode ? 'btn-dark dark-mode-color-dark':''}}" (click)="addToCart(product)" class="btn border-0 my-3 "><span>ADD TO CART</span></button>
                     <p class="mt-3 ">{{product?.description}}</p>
                 </div>

@@ -70,7 +70,7 @@ export class CartService {
       } else {
         return new UnauthorizedException('Unauthorized')
       }
-    } catch (error) {                  
+    } catch (error) {                        
       return new InternalServerErrorException('Faild to add cart')
     }
   }
@@ -81,7 +81,7 @@ export class CartService {
       if (currency == 'jpy') {
         amount = (total).toFixed(0)
       }else{
-        amount = total*100
+        amount = (total*100).toFixed(2).replace(/\.?0+$/, '')
       }
       const charged = await this.stripe.paymentIntents.create({
         amount: amount,
@@ -94,9 +94,7 @@ export class CartService {
         { payment_method: "pm_card_visa" }
       );
       return true
-    } catch (error) {
-      console.log(error);
-      
+    } catch (error) {      
       return false
     }
   }

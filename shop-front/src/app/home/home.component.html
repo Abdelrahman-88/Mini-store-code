@@ -46,7 +46,7 @@
                             <div class="d-flex justify-content-between align-items-center border-top px-3 py-2">
                                 <div class="col name">
                                     <p class="text-muted m-0 name">{{product?.name}}</p>
-                                    <p ngClass="{{darkMode ? 'dark-mode-color':''}}" class="text-dark m-0">{{rate.sign}} {{rate.code == 'jpy' ? (product.price*rate.rate| number : '1.0-2'):(product.price*rate.rate| number : '1.2-2')}}</p>
+                                    <p ngClass="{{darkMode ? 'dark-mode-color':''}}" class="text-dark m-0">{{rate.sign}} {{rate.code == 'jpy' ? (product.price*rate.rate| number : '1.0-0'):(product.price*rate.rate| number : '1.2-2')}}</p>
                                 </div>
                                 <div class="col" (click)="addToCart(product)" class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
                             </div>

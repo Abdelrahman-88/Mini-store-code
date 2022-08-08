@@ -9,10 +9,10 @@
                         <li class="nav-item mx-2">
                             <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link py-3" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
                         </li>
-                        <li class="nav-item mx-2">
+                        <li *ngIf="!user" class="nav-item mx-2">
                             <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link py-3" routerLink="/login" routerLinkActive="active">Login</a>
                         </li>
-                        <li class="nav-item mx-2">
+                        <li *ngIf="!user" class="nav-item mx-2">
                             <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link py-3" routerLink="/register" routerLinkActive="active">Register</a>
                         </li>
                     </ul>
@@ -22,7 +22,7 @@
                 </div>
                 <div>
                     <ul class="navbar-nav flex-row justify-content-between align-items-center">
-                        <li class="nav-item dropdown mx-2">
+                        <li *ngIf="user" class="nav-item dropdown mx-2">
                             <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link dropdown-toggle text-end" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i *ngIf="!user?.profilePic" class="fa-solid fa-user"></i>
                                 <img class="profile" *ngIf="user?.profilePic" src="{{user?.profilePic}}" alt="profilePic">
@@ -71,8 +71,8 @@
                     <table ngClass="{{darkMode ? 'dark-mode-color dark-mode-back':''}}" *ngIf="services?.length" class="table text-center text-dark">
                         <tbody>
                             <tr *ngFor="let service of services ">
-                                <td class="name">{{service.name}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.price*rate.rate| number : '1.0-2'):(service.price*rate.rate| number : '1.2-2')}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.total*rate.rate| number
-                                    : '1.0-2'):(service.total*rate.rate| number : '1.2-2')}}</td>
+                                <td class="name">{{service.name}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.price*rate.rate| number : '1.0-0'):(service.price*rate.rate| number : '1.2-2')}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.total*rate.rate| number
+                                    : '1.0-0'):(service.total*rate.rate| number : '1.2-2')}}</td>
                                 <td>
                                     <i (click)="counter(service.serviceId,1)" class="fa-solid fa-square-plus cart-icon"></i><br>
                                     <p class="my-0">{{service.quantity}}</p>
@@ -86,7 +86,7 @@
                                 <th scope="row">Total</th>
                                 <td></td>
                                 <td></td>
-                                <td>{{rate.sign}} {{rate.code == 'jpy' ? (total*rate.rate| number : '1.0-2'):(total*rate.rate| number : '1.2-2')}}</td>
+                                <td>{{rate.sign}} {{rate.code == 'jpy' ? (total*rate.rate| number : '1.0-0'):(total*rate.rate| number : '1.2-2')}}</td>
                             </tr>
                         </tbody>
                     </table>

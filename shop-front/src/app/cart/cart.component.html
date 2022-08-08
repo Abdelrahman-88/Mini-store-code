@@ -12,7 +12,7 @@
             <table ngClass="{{darkMode ? 'dark-mode-back dark-mode-color':''}}" *ngIf="services?.length" class="table text-center text-dark">
                 <tbody>
                     <tr *ngFor="let service of services">
-                        <td class="name">{{service.name}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.price*rate.rate| number : '1.0-2'):(service.price*rate.rate| number : '1.2-2')}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.total*rate.rate| number : '1.0-2'):(service.total*rate.rate|
+                        <td class="name">{{service.name}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.price*rate.rate| number : '1.0-0'):(service.price*rate.rate| number : '1.2-2')}} <br>{{rate.sign}} {{rate.code == 'jpy' ? (service.total*rate.rate| number : '1.0-0'):(service.total*rate.rate|
                             number : '1.2-2')}}</td>
                         <td>
                             <i (click)="counter(service.serviceId,1)" class="fa-solid fa-square-plus cart-icon"></i><br>
@@ -27,7 +27,7 @@
                         <th scope="row">Total</th>
                         <td></td>
                         <td></td>
-                        <td>{{rate.sign}} {{rate.code == 'jpy' ? (total*rate.rate| number : '1.0-2'):(total*rate.rate| number : '1.2-2')}}</td>
+                        <td>{{rate.sign}} {{rate.code == 'jpy' ? (total*rate.rate| number : '1.0-0'):(total*rate.rate| number : '1.2-2')}}</td>
                     </tr>
                 </tbody>
             </table>
