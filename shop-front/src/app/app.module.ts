@@ -72,7 +72,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '280410149538-752ere98dbab0du7ro51te1hnm9mrctp.apps.googleusercontent.com', {
+              '296951627811-22brsguov49f4lka0um5llk4235jsa4q.apps.googleusercontent.com', {
                 scope: 'email',
                 plugin_name: 'login-app'
               }

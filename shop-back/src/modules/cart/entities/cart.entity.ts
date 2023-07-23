@@ -11,9 +11,9 @@ export class Cart extends Document{
     createdBy: User;
   
     @Prop({
-        required: true, type:[{quantity:{type:Number,required: true}, total:{type:Number}, product:{type:mongoose.Schema.Types.ObjectId, ref: 'Product',required: true},_id:false}]
+        required: true, type:[{quantity:{type:Number,required: true}, total:{type:Number}, product:{type:mongoose.Schema.Types.ObjectId, ref: 'Product',required: true}, price:{type:Number}, name:{type:String}, poster:{type:String},_id:false}]
       })
-    products: { quantity: number; total: number; product: Product; }[];
+    products: { quantity: number; total: number; product: Product; name:string; price:number; poster:string }[];
 
     @Prop({ required: true })
     totalPrice: number;

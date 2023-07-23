@@ -21,18 +21,18 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let service of cart.products">
-                        <td class="name">{{service.product.name}}</td>
+                        <td class="name">{{service.name}}</td>
                         <td>
                             {{service.quantity}}
                         </td>
                         <td>
-                            {{cart.currency == 'jpy' ? (service.product.price*currency?.rate| number : '1.0-0'):(service.product.price*currency?.rate| number : '1.2-2')}}
+                            {{cart.currency == 'jpy' ? (service.price*currency?.rate| number : '1.0-0'):(service.price*currency?.rate| number : '1.2-2')}}
                         </td>
                         <td>
                             {{cart.currency}}
                         </td>
 
-                        <td><img [routerLink]="['/productDetails',service.product._id]" class="gallery" src="{{service?.product.poster ? service?.product.poster:'assets/imgs/no-image.png' }}" alt=""></td>
+                        <td><img [routerLink]="['/productDetails',service.product]" class="gallery" src="{{service?.poster ? service?.poster:'assets/imgs/no-image.png' }}" alt=""></td>
                         <td>
                             {{cart.currency == 'jpy' ? (service.total| number : '1.0-0'):(service.total| number : '1.2-2')}} {{currency?.sign}}
                         </td>

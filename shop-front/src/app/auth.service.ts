@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  url = 'https://ministore1.herokuapp.com/users/'
-
+  // url = 'https://ministore1.herokuapp.com/users/'
+  url = `http://localhost:3000/users/`
   userData = new BehaviorSubject(null);
   headers:any;
   id:any;

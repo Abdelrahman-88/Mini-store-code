@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "name": "shop",
+    "builds": [
+        { "src": "main.ts", "use": "@vercel/node" }
+    ],
+    "routes": [
+        { "src": "/(.*)", "dest": "/main.ts" }
+    ],
+    "git": {
+        "deploymentEnabled": {
+            "master": true
+        }
+    }
+}

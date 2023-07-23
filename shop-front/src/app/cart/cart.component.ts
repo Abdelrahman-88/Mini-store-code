@@ -178,7 +178,7 @@ export class CartComponent implements OnInit {
         }
       }
     },
-    error:(error:any)=>{                   
+    error:(error:any)=>{                         
       this.spinner.hide();        
       if (this.cartForm.get('payment')?.value == 'card') {
         this.toastr.error(`Some Error is taken place inside the payment`, "", { positionClass: 'toast-bottom-right', timeOut: 5000 });

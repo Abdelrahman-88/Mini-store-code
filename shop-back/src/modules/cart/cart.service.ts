@@ -43,12 +43,16 @@ export class CartService {
                 if (valid) {
                   product['total'] = (valid.price * product.quantity)*rate;
                   totalPrice += product.total;
+                  product['name'] = valid.name;
+                  product['price'] = valid.price;
+                  product['poster'] = valid.poster;
+
                   newProducts.push(product);
                 } else {                  
                   error = true
                 }
             });
-            await Promise.all(promises);            
+            await Promise.all(promises);                        
             if (error) {
               return new NotFoundException('Invalid product')
             } else {
@@ -70,7 +74,7 @@ export class CartService {
       } else {
         return new UnauthorizedException('Unauthorized')
       }
-    } catch (error) {                        
+    } catch (error) {                              
       return new InternalServerErrorException('Faild to add cart')
     }
   }
@@ -135,7 +139,7 @@ export class CartService {
 
   async findOne(req:any,cartId: string) : Promise<object> {
     try {
-      const cart = await this.cartModel.findOne({_id:cartId}).populate({ path: "products", populate: { path: "product" } })
+      const cart = await this.cartModel.findOne({_id:cartId})
       if (cart) {
         if (req.user.user._id.equals(cart.createdBy)||req.user.user.role=='admin') {
           return {message:"done",cart}

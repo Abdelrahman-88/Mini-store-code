@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  url ='https://ministore1.herokuapp.com/products/'
+  // url ='https://ministore1.herokuapp.com/products/'
+  url = `http://localhost:3000/products/`
   constructor(private _HttpClient:HttpClient) { }
 
   getProducts(category:string,size:number,search:string,page:number):Observable<any>{

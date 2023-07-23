@@ -7,7 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CurrencyService {
 
-  url ='https://ministore1.herokuapp.com/currency/'
+  // url ='https://ministore1.herokuapp.com/currency/'
+  url = `http://localhost:3000/currency/`
   currencies =new BehaviorSubject(null);
   rate =new BehaviorSubject({sign: '$', rate: 1,code:'usd'});
 
