@@ -41,7 +41,7 @@
                     <div class="product">
                         <div class="content">
                             <div>
-                                <img [routerLink]="['/productDetails',product._id]" class="w-100 px-3 py-2" src="{{product?.poster ? product?.poster:'assets/imgs/no-image.png' }}" alt="{{product?.name}}">
+                                <img [routerLink]="['/productDetails',product._id]" class="w-100 px-3 py-2" src="{{product?.poster ? prefix + product?.poster:'assets/imgs/no-image.png' }}" alt="{{product?.name}}">
                             </div>
                             <div class="d-flex justify-content-between align-items-center border-top px-3 py-2">
                                 <div class="col name">

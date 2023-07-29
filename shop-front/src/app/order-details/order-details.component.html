@@ -32,7 +32,7 @@
                             {{cart.currency}}
                         </td>
 
-                        <td><img [routerLink]="['/productDetails',service.product]" class="gallery" src="{{service?.poster ? service?.poster:'assets/imgs/no-image.png' }}" alt=""></td>
+                        <td><img [routerLink]="['/productDetails',service.product]" class="gallery" src="{{service?.poster ? prefix + service?.poster:'assets/imgs/no-image.png' }}" alt=""></td>
                         <td>
                             {{cart.currency == 'jpy' ? (service.total| number : '1.0-0'):(service.total| number : '1.2-2')}} {{currency?.sign}}
                         </td>

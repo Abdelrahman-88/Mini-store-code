@@ -50,7 +50,7 @@ export class UsersService {
         return new BadRequestException('Email already exist')
       } else {
         if (file) {
-          user = new this.userModel({email,...value,profilePic:this.configService.get('USERSURL')+file.filename});
+          user = new this.userModel({email,...value,profilePic:file.filename});
        } else {
          user = new this.userModel({email,...value});
        }
@@ -89,7 +89,7 @@ export class UsersService {
       if (emailExist) {
         if (email==user.email) {
           if (file) {
-            updatedUser = await this.userModel.findOneAndUpdate({_id:id},{email,...value,profilePic:this.configService.get('USERSURL')+file.filename},{new:true}).select("-password")
+            updatedUser = await this.userModel.findOneAndUpdate({_id:id},{email,...value,profilePic:file.filename},{new:true}).select("-password")
           } else {
             updatedUser = await this.userModel.findOneAndUpdate({_id:id},{email,...value,profilePic:user.profilePic},{new:true}).select("-password")
           }
@@ -105,7 +105,7 @@ export class UsersService {
         }
       } else {
         if (file) {
-          updatedUser = await this.userModel.findOneAndUpdate({_id:id},{email,...value,verified:false,profilePic:this.configService.get('USERSURL')+file.filename},{new:true}).select("-password")
+          updatedUser = await this.userModel.findOneAndUpdate({_id:id},{email,...value,verified:false,profilePic:file.filename},{new:true}).select("-password")
         } else {
           updatedUser = await this.userModel.findOneAndUpdate({_id:id},{email,...value,verified:false,profilePic:user.profilePic},{new:true}).select("-password")
         }
@@ -201,7 +201,7 @@ export class UsersService {
 
   async displayDocument(res:any,fileName:string):Promise<any>{
     try {      
-        const file = await this.userModel.findOne({profilePic:this.configService.get('USERSURL')+fileName});
+        const file = await this.userModel.findOne({profilePic:fileName});
         if (file) {
             let downloadStream = this.fileModel.openDownloadStreamByName(fileName);
             downloadStream = downloadStream.pipe(res)            

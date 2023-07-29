@@ -8,8 +8,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CartService {
-  // url = 'https://ministore1.herokuapp.com/cart/'
-     url = `http://localhost:3000/cart/`
+  url = 'https://mini-store.up.railway.app/cart/'
+    //  url = `http://localhost:3000/cart/`
   headers:any;
   id:any;
 

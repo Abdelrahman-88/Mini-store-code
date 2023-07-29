@@ -20,7 +20,7 @@
                             <i [ngClass]="(service.quantity <=1 ? 'disable': '')" (click)="counter(service.serviceId,-1)" class="fa-solid fa-square-minus cart-icon"></i>
                         </td>
 
-                        <td><img [routerLink]="['/productDetails',service.serviceId]" class="gallery" src="{{service?.poster ? service?.poster:'assets/imgs/no-image.png' }}" alt=""></td>
+                        <td><img [routerLink]="['/productDetails',service.serviceId]" class="gallery" src="{{service?.poster ? prefix + service?.poster:'assets/imgs/no-image.png' }}" alt=""></td>
                         <td><br><i (click)="removeFromCart(service.serviceId)" class="fa-solid fa-rectangle-xmark cart-icon"></i></td>
                     </tr>
                     <tr>

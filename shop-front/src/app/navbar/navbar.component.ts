@@ -66,6 +66,8 @@ export class NavbarComponent implements OnInit {
   error:any;
   user:any;
   darkMode: boolean = false;
+  prefix: string = "https://mini-store.up.railway.app/products/file/";
+  profilePrefix: string = "https://mini-store.up.railway.app/users/file/";
 
   constructor(private _CurrencyService:CurrencyService,private _CartService: CartService,private _AuthService:AuthService,private _Router:Router,private _DarkModeService:DarkModeService) { }
 

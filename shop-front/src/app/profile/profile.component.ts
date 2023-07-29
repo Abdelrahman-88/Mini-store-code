@@ -11,6 +11,7 @@ export class ProfileComponent implements OnInit {
 
   user:any;
   darkMode: boolean = false;
+  prefix: string = "https://mini-store.up.railway.app/users/file/";
 
   constructor(private _AuthService:AuthService,private _DarkModeService:DarkModeService) { }
 

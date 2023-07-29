@@ -30,8 +30,8 @@ export class ProductsService {
         if (req.user.user._id.equals(createdBy)) {        
           if (files.gallery&&files.poster) {        
             let gallery =[];
-            files.gallery.map((file)=>{gallery.push(this.configService.get('PRODUCTSURL')+file.filename)})
-            const poster = this.configService.get('PRODUCTSURL')+files.poster[0].filename
+            files.gallery.map((file)=>{gallery.push(file.filename)})
+            const poster = files.poster[0].filename
             const product = new this.productModel({createdBy,poster,gallery,...createProductDto})
             const data = await product.save()
             return {message:"Product added successfully",data}
@@ -84,8 +84,8 @@ export class ProductsService {
         if (find) {
           if (files.gallery&&files.poster) {
             let gallery =[];
-            files.gallery.map((file)=>{gallery.push(this.configService.get('PRODUCTSURL')+file.filename)})
-            const poster = this.configService.get('PRODUCTSURL')+files.poster[0].filename
+            files.gallery.map((file)=>{gallery.push(file.filename)})
+            const poster = files.poster[0].filename
             const updated = await this.productModel.findOneAndUpdate({_id:productId},{gallery,poster,...updateProductDto},{new:true})
             return {message:"Product updated successfully",updated};
           } else {
@@ -103,7 +103,7 @@ export class ProductsService {
 
   async displayGallery(res:any,fileName:string):Promise<any>{
     try {      
-        const file = await this.productModel.findOne({gallery:this.configService.get('PRODUCTSURL')+fileName});
+        const file = await this.productModel.findOne({gallery:fileName});
         if (file) {
             let downloadStream = this.fileModel.openDownloadStreamByName(fileName);
             downloadStream = downloadStream.pipe(res)            
@@ -111,7 +111,7 @@ export class ProductsService {
               return data;
             });
         } else {
-          const poster = await this.productModel.findOne({poster:this.configService.get('PRODUCTSURL')+fileName});
+          const poster = await this.productModel.findOne({poster:fileName});
           if (poster) {
             let downloadStream = this.fileModel.openDownloadStreamByName(fileName);
             downloadStream = downloadStream.pipe(res)            

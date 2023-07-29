@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   active:number=0;
   darkMode: boolean = false;
   response: boolean = false;
+  prefix: string = "https://mini-store.up.railway.app/products/file/";
 
   searchForm: FormGroup = new FormGroup({
     "term": new FormControl(null, [Validators.pattern(/^[0-9a-zA-Z ]+$/)])

@@ -5,11 +5,11 @@
             <div class="col-lg-7 text-center">
                 <div *ngIf="!owl" class="row basic">
                     <div class="col-2">
-                        <img *ngFor="let item of product?.gallery; let i = index;" [ngClass]="{'active': active === i}" (click)="changeImg($event,i)" class="w-100 p-3 gallery mb-2 border" src="{{item}}" alt="{{product.name}}">
+                        <img *ngFor="let item of product?.gallery; let i = index;" [ngClass]="{'active': active === i}" (click)="changeImg($event,i)" class="w-100 p-3 gallery mb-2 border" src="{{prefix + item}}" alt="{{product.name}}">
                     </div>
                     <div class="col-10">
                         <div class="p-3 bg-white" *ngIf="product?.gallery?.length">
-                            <img class="w-100 gallery-main" src="{{src ? src:product?.gallery[0]}}" alt="gallery">
+                            <img class="w-100 gallery-main" src="{{src ? src:prefix + product?.gallery[0]}}" alt="gallery">
                         </div>
                         <div class="p-3" *ngIf="!product?.gallery?.length">
                             <img class="w-100" src="assets/imgs/no-image.png" alt="no-image">
@@ -18,7 +18,7 @@
                 </div>
                 <owl-carousel-o *ngIf="owl" [options]="customOptions" class="text-center option">
                     <ng-template *ngFor="let item of product?.gallery;" carouselSlide>
-                        <img class="img-fluid owl-gallery" src="{{item}}" alt="gallery">
+                        <img class="img-fluid owl-gallery" src="{{prefix + item}}" alt="gallery">
                     </ng-template>
                 </owl-carousel-o>
             </div>

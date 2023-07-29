@@ -25,7 +25,7 @@
                         <li *ngIf="user" class="nav-item dropdown mx-2">
                             <a ngClass="{{darkMode ? 'dark-mode-color':''}}" class="nav-link dropdown-toggle text-end" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i *ngIf="!user?.profilePic" class="fa-solid fa-user"></i>
-                                <img class="profile" *ngIf="user?.profilePic" src="{{user?.profilePic}}" alt="profilePic">
+                                <img class="profile" *ngIf="user?.profilePic" src="{{user?.profilePic.startsWith('https://') ? user?.profilePic : profilePrefix + user?.profilePic}}" alt="profilePic">
                             </a>
                             <ul ngClass="{{darkMode ? 'dark-mode-color dark-mode-back border-white':''}}" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li routerLink="/profile"><a ngClass="{{darkMode ? 'dark-mode-color back-dark-mode':''}}" class="dropdown-item">Profile</a></li>
@@ -79,7 +79,7 @@
                                     <i [ngClass]="(service.quantity <=1 ? 'disable': '')" (click)="counter(service.serviceId,-1)" class="fa-solid fa-square-minus cart-icon"></i>
                                 </td>
 
-                                <td><img class="gallery" src="{{service?.poster ? service?.poster: 'assets/imgs/no-image.png' }}" alt="gallery"></td>
+                                <td><img class="gallery" src="{{service?.poster ? prefix + service?.poster: 'assets/imgs/no-image.png' }}" alt="gallery"></td>
                                 <td><br><i (click)="removeFromCart(service.serviceId) " class="fa-solid fa-rectangle-xmark cart-icon"></i></td>
                             </tr>
                             <tr>

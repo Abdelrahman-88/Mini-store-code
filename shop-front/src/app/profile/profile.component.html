@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-6">
                 <div>
-                    <img class="w-100 profile" src="{{user.profilePic ? user.profilePic:'assets/imgs/avatar.png'}}" alt="">
+                    <img class="w-100 profile" src="{{!user.profilePic ? 'assets/imgs/avatar.png' : user?.profilePic.startsWith('https://') ? user?.profilePic : prefix + user?.profilePic}}" alt="">
                 </div>
             </div>
         </div>

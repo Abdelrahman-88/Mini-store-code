@@ -61,6 +61,7 @@ export class ProductDetailsComponent implements OnInit {
   active:number=0;
   owl:boolean=false;
   darkMode: boolean = false;
+  prefix: string = "https://mini-store.up.railway.app/products/file/";
 
   constructor(private _ProductService:ProductService,private _ActivatedRoute: ActivatedRoute,private _Router:Router,private _CurrencyService:CurrencyService,private _CartService:CartService,private _DarkModeService:DarkModeService,private spinner: NgxSpinnerService, private toastr: ToastrService) { }
 

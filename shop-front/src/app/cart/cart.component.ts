@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
   error:any;
   user:any;
   darkMode: boolean = false;
+  prefix: string = "https://mini-store.up.railway.app/products/file/";
 
   cartForm: FormGroup = new FormGroup({
     "contactNumber": new FormControl(null, [Validators.required,Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)]),
